@@ -269,6 +269,7 @@
             border-radius: 99px;
             font-size: 13px;
             color: var(--text-main);
+            font-weight: bold;
         }
 
         /* Section: Experience (Timeline) */
@@ -379,7 +380,7 @@
             </div>
             <div class="separator"></div>
             <a href="projects.html" class="btn-cta btn-green">
-                My Recent Projects
+                <span></span>My Recent Projects
             </a>
             <div class="separator"></div>
             <a href="hire-me.html" class="btn-cta">
@@ -643,8 +644,7 @@
                                 <li>Maintaining code related to existing bugs and platform stability.</li>
                                 <li>Data Migration from Elasticsearch to OpenSearch.</li>
                                 <li>Creating new data-platform for analytics and reporting.</li>
-                                <li>Architecting a modular data warehouse on AWS Redshift by implementing reusable data
-                                    models through dbt.</li>
+                                <li>Developing reusable data models for the AWS Redshift data warehouse using dbt.</li>
                             </ul>
                         </div>
                     </div>
@@ -758,6 +758,21 @@
 
         </main>
     </div>
+
+    <!-- Randomize Pill Colors -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll('.pill').forEach(pill => {
+                const hue = Math.floor(Math.random() * 360);
+                // Keep saturation moderate-high and lightness low for dark theme contrast
+                const completionHue = `hsl(${hue}, 65%, 20%)`;
+                const borderHue = `hsl(${hue}, 65%, 30%)`;
+
+                pill.style.backgroundColor = completionHue;
+                pill.style.borderColor = borderHue;
+            });
+        });
+    </script>
 
 </body>
 
