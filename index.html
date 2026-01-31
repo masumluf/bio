@@ -1,0 +1,438 @@
+<html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rezaul Karim</title>
+  <meta name="description" content="Minimalist portfolio for Md Rezaul Karim — Full-stack & DevOps Engineer." />
+
+  <style>
+    :root{
+      --bg:#fafafa;
+      --card:#ffffff;
+      --text:#111827;      /* zinc-900-ish */
+      --muted:#4b5563;     /* zinc-600-ish */
+      --border:#e5e7eb;    /* zinc-200-ish */
+      --chip:#f9fafb;
+      --shadow: 0 1px 2px rgba(0,0,0,.05);
+      --radius: 18px;
+      --max: 760px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+    }
+
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg:#0b0f14;
+        --card:#0f1720;
+        --text:#e5e7eb;
+        --muted:#9ca3af;
+        --border:#1f2937;
+        --chip:#0b1220;
+        --shadow: 0 1px 2px rgba(0,0,0,.35);
+      }
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--sans);
+      background:var(--bg);
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.55;
+    }
+
+    a{
+      color:inherit;
+      text-decoration-color: color-mix(in srgb, var(--muted) 55%, transparent);
+      text-underline-offset: 4px;
+    }
+    a:hover{ text-decoration-color: color-mix(in srgb, var(--text) 65%, transparent); }
+
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 56px 20px 44px;
+    }
+
+    .card{
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .header{
+      padding: 22px;
+      display:flex;
+      gap:16px;
+      align-items:flex-start;
+    }
+
+    .avatar{
+      width: 48px;
+      height: 48px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: color-mix(in srgb, var(--chip) 80%, transparent);
+      display:grid;
+      place-items:center;
+      font-weight: 700;
+      font-size: 14px;
+      flex: 0 0 auto;
+    }
+
+    h1{
+      margin:0;
+      font-size: 20px;
+      letter-spacing:-0.02em;
+      line-height:1.25;
+    }
+    .title{
+      margin-top:6px;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .summary{
+      margin-top: 12px;
+      color: color-mix(in srgb, var(--text) 92%, transparent);
+      font-size: 14px;
+    }
+
+    .meta{
+      margin-top: 14px;
+      display:flex;
+      flex-wrap:wrap;
+      gap: 10px 16px;
+      color: var(--muted);
+      font-size: 13px;
+      align-items:center;
+    }
+
+    .dot{
+      width: 6px;
+      height: 6px;
+      border-radius:999px;
+      background: color-mix(in srgb, var(--muted) 55%, transparent);
+      display:inline-block;
+      margin-right: 8px;
+      transform: translateY(-1px);
+    }
+
+    .links{
+      margin-top: 10px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px 14px;
+      font-size: 13px;
+    }
+
+    .section{
+      margin-top: 28px;
+    }
+    .section h2{
+      margin: 0 0 12px;
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: color-mix(in srgb, var(--text) 75%, transparent);
+    }
+
+    .skills{
+      display:grid;
+      gap: 16px;
+    }
+
+    .group-title{
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing:.08em;
+      margin-bottom: 8px;
+    }
+
+    .chips{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      font-size: 12px;
+      color: color-mix(in srgb, var(--text) 92%, transparent);
+      white-space:nowrap;
+    }
+
+    .grid{
+      display:grid;
+      gap: 14px;
+    }
+
+    .exp{
+      padding: 18px;
+    }
+    .exp-top{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:space-between;
+      gap: 8px 12px;
+      align-items:baseline;
+    }
+    .exp-role{
+      margin:0;
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+    .exp-dates{
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .exp-company{
+      margin-top: 4px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .exp ul{
+      margin: 12px 0 0;
+      padding-left: 18px;
+      color: color-mix(in srgb, var(--text) 92%, transparent);
+      font-size: 13.5px;
+    }
+    .exp li{ margin: 7px 0; }
+
+    .footer{
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 12px;
+      padding-bottom: 10px;
+    }
+
+    .kicker{
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* small screens */
+    @media (max-width: 520px){
+      .wrap{ padding-top: 42px; }
+      .header{ padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <!-- HERO -->
+    <header class="card header">
+      <div class="avatar" id="avatar">MR</div>
+
+      <div style="min-width:0;">
+        <h1 id="name">Md Rezaul Karim</h1>
+        <div class="title" id="headline">Senior Software Engineer (Full-stack • DevOps)</div>
+
+        <div class="summary" id="summary">
+          Software engineer with 5+ years across frontend, backend, and DevOps. I build scalable systems with
+          TypeScript/Node.js, Kafka (exactly-once), cloud infrastructure (AWS/Azure), and AI features like
+          RAG-based recommendations and chat.
+        </div>
+
+        <div class="meta">
+          <span><span class="dot"></span><a id="email" href="mailto:your.email@example.com">your.email@example.com</a></span>
+          <span><span class="dot"></span><span id="location">Dhaka, Bangladesh</span></span>
+        </div>
+
+        <nav class="links" aria-label="Links">
+          <a href="https://github.com/your-handle" target="_blank" rel="noreferrer">GitHub</a>
+          <a href="https://linkedin.com/in/your-handle" target="_blank" rel="noreferrer">LinkedIn</a>
+          <a href="https://your-domain.com" target="_blank" rel="noreferrer">Website</a>
+          <span class="kicker">Open to: Backend • Platform • Data/Streaming • AI Apps</span>
+        </nav>
+      </div>
+    </header>
+
+    <!-- SKILLS -->
+    <section class="section">
+      <h2>Core Skills</h2>
+
+      <div class="skills">
+        <div>
+          <div class="group-title">Languages</div>
+          <div class="chips">
+            <span class="chip">TypeScript</span>
+            <span class="chip">JavaScript</span>
+            <span class="chip">Python</span>
+            <span class="chip">PHP</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="group-title">Frontend</div>
+          <div class="chips">
+            <span class="chip">React</span>
+            <span class="chip">Next.js</span>
+            <span class="chip">Vue.js</span>
+            <span class="chip">Svelte</span>
+            <span class="chip">Redux</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="group-title">Backend</div>
+          <div class="chips">
+            <span class="chip">Node.js</span>
+            <span class="chip">NestJS</span>
+            <span class="chip">Express</span>
+            <span class="chip">Serverless</span>
+            <span class="chip">GraphQL</span>
+            <span class="chip">WebSockets</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="group-title">Data & Messaging</div>
+          <div class="chips">
+            <span class="chip">PostgreSQL</span>
+            <span class="chip">MySQL</span>
+            <span class="chip">MongoDB</span>
+            <span class="chip">Redis</span>
+            <span class="chip">Kafka</span>
+            <span class="chip">RabbitMQ</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="group-title">Search & AI</div>
+          <div class="chips">
+            <span class="chip">Elasticsearch</span>
+            <span class="chip">Algolia</span>
+            <span class="chip">Vector DBs</span>
+            <span class="chip">RAG Systems</span>
+            <span class="chip">Product Recommendations</span>
+          </div>
+        </div>
+
+        <div>
+          <div class="group-title">Cloud & DevOps</div>
+          <div class="chips">
+            <span class="chip">AWS</span>
+            <span class="chip">Azure</span>
+            <span class="chip">Docker</span>
+            <span class="chip">Kubernetes</span>
+            <span class="chip">Terraform</span>
+            <span class="chip">CI/CD</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="section">
+      <h2>Experience</h2>
+
+      <div class="grid">
+        <article class="card exp">
+          <div class="exp-top">
+            <p class="exp-role">Software Engineer</p>
+            <span class="exp-dates">2025 — Present</span>
+          </div>
+          <div class="exp-company">Product Team (cloud-native services)</div>
+          <ul>
+            <li>Built and operated production services with clean CI/CD and reliability-focused practices.</li>
+            <li>Improved delivery speed by standardizing build/deploy workflows and developer tooling.</li>
+          </ul>
+        </article>
+
+        <article class="card exp">
+          <div class="exp-top">
+            <p class="exp-role">Full-stack Engineer</p>
+            <span class="exp-dates">2022 — 2025</span>
+          </div>
+          <div class="exp-company">Event-driven architecture • Streaming & data pipelines</div>
+          <ul>
+            <li>Implemented Kafka exactly-once processing patterns for failover-resilient data flows.</li>
+            <li>Developed RAG-driven recommendation/chat features integrated into product experiences.</li>
+          </ul>
+        </article>
+
+        <article class="card exp">
+          <div class="exp-top">
+            <p class="exp-role">Software Engineer</p>
+            <span class="exp-dates">2020 — 2022</span>
+          </div>
+          <div class="exp-company">Client projects • Full-stack delivery</div>
+          <ul>
+            <li>Delivered React + Node.js applications with scalable database design and APIs.</li>
+            <li>Handled deployments, monitoring, and iterative improvements based on real usage.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- PROJECTS (optional) -->
+    <section class="section">
+      <h2>Selected Projects</h2>
+
+      <div class="grid">
+        <article class="card exp">
+          <div class="exp-top">
+            <p class="exp-role">Real-time Chat (SSE) on Cloud Run</p>
+            <span class="exp-dates">Case Study</span>
+          </div>
+          <div class="exp-company">Node.js • Google Cloud Run • MongoDB Atlas</div>
+          <ul>
+            <li>Designed client-specific messaging with auto-reconnect and scalable delivery.</li>
+            <li>Built for high concurrency with predictable server resource usage.</li>
+          </ul>
+        </article>
+
+        <article class="card exp">
+          <div class="exp-top">
+            <p class="exp-role">RAG Product Recommendations</p>
+            <span class="exp-dates">Case Study</span>
+          </div>
+          <div class="exp-company">Retrieval • Embeddings • Search relevance</div>
+          <ul>
+            <li>Implemented retrieval + ranking to generate grounded product suggestions.</li>
+            <li>Focused on latency, quality tradeoffs, and measurable evaluation metrics.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <footer class="footer">
+      © <span id="year"></span> <span id="footerName">Md Rezaul Karim</span>
+    </footer>
+  </main>
+
+  <script>
+    // Auto initials + year
+    (function(){
+      const nameEl = document.getElementById("name");
+      const avatar = document.getElementById("avatar");
+      const yearEl = document.getElementById("year");
+      const footerName = document.getElementById("footerName");
+
+      const name = (nameEl?.textContent || "").trim();
+      const parts = name.split(/\s+/).filter(Boolean).slice(0,2);
+      const initials = parts.map(p => (p[0] || "").toUpperCase()).join("") || "ME";
+
+      avatar.textContent = initials;
+      yearEl.textContent = String(new Date().getFullYear());
+      footerName.textContent = name || "Your Name";
+    })();
+  </script>
+</body>
+</html>
+
