@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Md Rezaul Karim - Blog</title>
+    <meta name="description"
+        content="Blog by Md Rezaul Karim - Thoughts on software engineering, AI, cloud architecture, and building scalable systems." />
+    <style>
+        :root {
+            --bg-body: #0d1117;
+            --bg-sidebar: #0d1117;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            --accent: #a855f7;
+            --pill-bg: #1f2937;
+            --pill-border: #374151;
+            --border-color: #1f2937;
+            --timeline-line: #374151;
+
+            --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: var(--font-sans);
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        a:hover {
+            color: var(--text-main);
+        }
+
+        /* Layout Utilities */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Top Navigation Bar */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+            background-color: rgba(13, 17, 23, 0.9);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-content .separator {
+            width: 1px;
+            height: 20px;
+            background-color: var(--border-color);
+        }
+
+        .btn-cta {
+            background-color: var(--accent);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 99px;
+            font-weight: 500;
+            font-size: 13px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .btn-green {
+            background-color: #10b981 !important;
+        }
+
+        .btn-blue {
+            background-color: #3b82f6 !important;
+        }
+
+        /* Main Content Layout */
+        .main-layout {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            min-height: 100vh;
+            padding-top: 60px;
+            width: 100%;
+            margin: 0;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            padding: 30px 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            border-right: 1px solid var(--border-color);
+            position: sticky;
+            top: 60px;
+            height: calc(100vh - 60px);
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .avatar-container {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 12px;
+            border: 2px solid var(--pill-bg);
+            background-color: #222;
+        }
+
+        .avatar-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .profile-name {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+            line-height: 1.2;
+        }
+
+        .profile-title {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin: 0 0 16px 0;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        .profile-bio {
+            display: none;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 24px;
+            font-size: 10px;
+            color: var(--text-muted);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        .social-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-muted);
+            cursor: pointer;
+            transition: fill 0.2s;
+        }
+
+        .social-icon:hover {
+            fill: var(--text-main);
+        }
+
+        /* Right Content Area */
+        .content-area {
+            padding: 80px 40px;
+            width: 100%;
+            max-width: none;
+            margin: 0;
+        }
+
+        .content-inner {
+            max-width: 100%;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        svg {
+            display: block;
+        }
+
+        /* ===== BLOG SPECIFIC STYLES ===== */
+
+        .blog-hero {
+            margin-bottom: 48px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .blog-hero h2 {
+            font-size: 28px;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #a855f7, #6366f1, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .blog-hero p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 28px;
+        }
+
+        /* Blog Card */
+        .blog-card {
+            background: var(--pill-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .blog-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #a855f7, #6366f1, #3b82f6);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(168, 85, 247, 0.12);
+            border-color: rgba(168, 85, 247, 0.3);
+        }
+
+        .blog-card:hover::before {
+            opacity: 1;
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            display: block;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+        }
+
+        .blog-card-body {
+            padding: 24px;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+
+        .blog-category {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            padding: 4px 10px;
+            border-radius: 99px;
+            background: rgba(168, 85, 247, 0.15);
+            color: #c084fc;
+            border: 1px solid rgba(168, 85, 247, 0.25);
+        }
+
+        .blog-category.cat-ai {
+            background: rgba(99, 102, 241, 0.15);
+            color: #818cf8;
+            border-color: rgba(99, 102, 241, 0.25);
+        }
+
+        .blog-category.cat-cloud {
+            background: rgba(59, 130, 246, 0.15);
+            color: #60a5fa;
+            border-color: rgba(59, 130, 246, 0.25);
+        }
+
+        .blog-category.cat-data {
+            background: rgba(16, 185, 129, 0.15);
+            color: #34d399;
+            border-color: rgba(16, 185, 129, 0.25);
+        }
+
+        .blog-category.cat-devops {
+            background: rgba(245, 158, 11, 0.15);
+            color: #fbbf24;
+            border-color: rgba(245, 158, 11, 0.25);
+        }
+
+        .blog-date {
+            font-size: 12px;
+            color: var(--text-dim);
+        }
+
+        .blog-read-time {
+            font-size: 12px;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .blog-card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 10px;
+            line-height: 1.4;
+            transition: color 0.2s;
+        }
+
+        .blog-card:hover .blog-card-title {
+            color: #c084fc;
+        }
+
+        .blog-card-excerpt {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .blog-read-more {
+            font-size: 13px;
+            font-weight: 600;
+            color: #a855f7;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: gap 0.2s ease;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0;
+            font-family: inherit;
+        }
+
+        .blog-card:hover .blog-read-more {
+            gap: 10px;
+        }
+
+        .blog-read-more svg {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .blog-card:hover .blog-read-more svg {
+            transform: translateX(2px);
+        }
+
+        /* Expanded Article Content */
+        .blog-full-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+
+        .blog-card.expanded .blog-full-content {
+            max-height: 5000px;
+            opacity: 1;
+        }
+
+        .blog-card.expanded {
+            transform: none !important;
+            cursor: default;
+        }
+
+        .blog-card.expanded.featured {
+            grid-template-columns: 1fr;
+        }
+
+        .blog-card.expanded.featured .blog-illustration {
+            display: none;
+        }
+
+        .blog-card.expanded .blog-card-excerpt {
+            display: none;
+        }
+
+        .blog-card.expanded .blog-read-more .read-label {
+            display: none;
+        }
+
+        .blog-card.expanded .blog-read-more .collapse-label {
+            display: inline;
+        }
+
+        .blog-read-more .collapse-label {
+            display: none;
+        }
+
+        .blog-card.expanded .blog-read-more svg {
+            transform: rotate(180deg);
+        }
+
+        .blog-card.expanded:hover .blog-read-more svg {
+            transform: rotate(180deg);
+        }
+
+        .blog-article-body {
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 16px;
+        }
+
+        .blog-article-body h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin: 28px 0 12px 0;
+            line-height: 1.4;
+        }
+
+        .blog-article-body h3:first-child {
+            margin-top: 0;
+        }
+
+        .blog-article-body p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin: 0 0 16px 0;
+        }
+
+        .blog-article-body ul,
+        .blog-article-body ol {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.8;
+            padding-left: 24px;
+            margin: 0 0 16px 0;
+        }
+
+        .blog-article-body li {
+            margin-bottom: 6px;
+        }
+
+        .blog-article-body code {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-size: 13px;
+            background: rgba(168, 85, 247, 0.1);
+            color: #c084fc;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .blog-article-body pre {
+            background: #161b22;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 16px;
+            overflow-x: auto;
+            margin: 0 0 16px 0;
+        }
+
+        .blog-article-body pre code {
+            background: none;
+            padding: 0;
+            color: #e6edf3;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .blog-article-body blockquote {
+            border-left: 3px solid var(--accent);
+            padding: 12px 16px;
+            margin: 0 0 16px 0;
+            background: rgba(168, 85, 247, 0.05);
+            border-radius: 0 8px 8px 0;
+        }
+
+        .blog-article-body blockquote p {
+            margin: 0;
+            color: var(--text-main);
+            font-style: italic;
+        }
+
+        .article-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .article-tag {
+            font-size: 11px;
+            color: var(--text-dim);
+            padding: 4px 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 99px;
+            transition: border-color 0.2s, color 0.2s;
+        }
+
+        .article-tag:hover {
+            border-color: var(--accent);
+            color: var(--text-muted);
+        }
+
+        /* Featured Card (first post - larger) */
+        .blog-card.featured {
+            grid-column: 1 / -1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .blog-card.featured .blog-card-image,
+        .blog-card.featured .blog-illustration {
+            height: 100%;
+            min-height: 280px;
+        }
+
+        /* Blog Placeholder Illustration */
+        .blog-illustration {
+            width: 100%;
+            height: 100%;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 36px;
+        }
+
+        .blog-illustration .illust-label {
+            font-size: 11px;
+            color: var(--text-dim);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* Gradient Backgrounds for illustrations */
+        .grad-purple {
+            background: linear-gradient(135deg, #1a1035 0%, #0d1117 50%, #1e1145 100%);
+        }
+
+        .grad-blue {
+            background: linear-gradient(135deg, #0c1929 0%, #0d1117 50%, #0f2540 100%);
+        }
+
+        .grad-green {
+            background: linear-gradient(135deg, #0a1f1a 0%, #0d1117 50%, #0d2818 100%);
+        }
+
+        .grad-orange {
+            background: linear-gradient(135deg, #1f1508 0%, #0d1117 50%, #261a08 100%);
+        }
+
+        .grad-pink {
+            background: linear-gradient(135deg, #1f0a1a 0%, #0d1117 50%, #250d20 100%);
+        }
+
+        /* Sidebar Blog Categories */
+        .sidebar-section {
+            width: 100%;
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .sidebar-section-title {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dim);
+            margin-bottom: 12px;
+        }
+
+        .sidebar-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .sidebar-cat-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            color: var(--text-muted);
+            padding: 6px 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+
+        .sidebar-cat-item:hover {
+            background: rgba(168, 85, 247, 0.08);
+            color: var(--text-main);
+        }
+
+        .sidebar-cat-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .sidebar-cat-count {
+            margin-left: auto;
+            font-size: 11px;
+            color: var(--text-dim);
+        }
+
+        /* Newsletter CTA in sidebar */
+        .newsletter-cta {
+            width: 100%;
+            margin-top: 20px;
+            padding: 16px 12px;
+            background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(99, 102, 241, 0.1));
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            border-radius: 12px;
+            text-align: center;
+        }
+
+        .newsletter-cta .newsletter-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .newsletter-cta .newsletter-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .newsletter-cta .newsletter-desc {
+            font-size: 11px;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 12px;
+        }
+
+        .newsletter-cta .newsletter-btn {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .newsletter-cta .newsletter-btn:hover {
+            background: #9333ea;
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .main-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                position: relative;
+                height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 40px 20px;
+                top: auto;
+            }
+
+            .content-area {
+                padding: 40px 20px;
+            }
+
+            .content-inner {
+                max-width: none;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-card.featured {
+                grid-template-columns: 1fr;
+            }
+
+            .blog-card.featured .blog-card-image {
+                min-height: 200px;
+            }
+
+            .sidebar-section {
+                display: none;
+            }
+
+            .newsletter-cta {
+                display: none;
+            }
+        }
+
+        /* Fade-in Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-card {
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .blog-card:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .blog-card:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .blog-card:nth-child(3) {
+            animation-delay: 0.3s;
+        }
+
+        .blog-card:nth-child(4) {
+            animation-delay: 0.4s;
+        }
+
+        .blog-card:nth-child(5) {
+            animation-delay: 0.5s;
+        }
+
+        .blog-card:nth-child(6) {
+            animation-delay: 0.6s;
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-ETN6DC0RMC"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-ETN6DC0RMC');
+    </script>
+</head>
+
+<body>
+
+    <!-- Top Navigation -->
+    <nav class="top-nav">
+        <div class="nav-content">
+            <div style="display:flex; align-items:center;">
+                <a href="index.html" style="font-weight:600; color:var(--text-main);">Home</a>
+            </div>
+            <div class="separator"></div>
+            <a href="projects.html" class="btn-cta btn-green">
+                My Recent Projects
+            </a>
+            <div class="separator"></div>
+            <a href="hire-me.html" class="btn-cta">
+                <span>🚀</span> Why Hire Me?
+            </a>
+            <div class="separator"></div>
+            <a href="blog.html" class="btn-cta btn-blue">
+                <span>✍️</span> Blog
+            </a>
+        </div>
+    </nav>
+
+    <div class="main-layout">
+
+        <!-- Left Sidebar: Profile -->
+        <aside class="sidebar">
+            <div class="avatar-container">
+                <img src="profile.jpeg" alt="Md Rezaul Karim" class="avatar-img" />
+            </div>
+
+            <h1 class="profile-name">Md Rezaul Karim</h1>
+            <div class="profile-title">Senior Full Stack Software Engineer</div>
+
+            <p class="profile-bio">
+                Expert in building scalable systems with React, Node.js, and Python. Specialized in RAG AI systems,
+                microservices, and cloud-native architecture on AWS.
+            </p>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z">
+                        </path>
+                    </svg>
+                    <a href="mailto:masum.luf@gmail.com">masum.luf@gmail.com</a>
+                </div>
+                <div class="contact-item">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z">
+                        </path>
+                    </svg>
+                    <span>+880 1913 198340(Whatsapp)</span>
+                </div>
+                <div class="contact-item">
+                    <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z">
+                        </path>
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z">
+                        </path>
+                    </svg>
+                    <span>Dhaka, Bangladesh</span>
+                </div>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://github.com/masumluf" target="_blank" title="GitHub">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/rezaul-karim-masum/" target="_blank" title="LinkedIn">
+                    <svg class="social-icon" viewBox="0 0 24 24">
+                        <path
+                            d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                    </svg>
+                </a>
+            </div>
+
+           
+        </aside>
+
+        <!-- Right Content -->
+        <main class="content-area">
+            <div class="content-inner">
+
+                <!-- Blog Hero -->
+                <div class="blog-hero">
+                    <h2>Blog & Insights</h2>
+                    <p>Sharing my experiences building scalable systems, working with AI, and lessons learned from
+                        real-world engineering challenges.</p>
+                </div>
+
+                <!-- Blog Grid -->
+                <div class="blog-grid">
+
+                    <!-- Featured Post -->
+                    <div class="blog-card featured" id="post-finetune-llm">
+                        <div class="blog-illustration grad-purple">
+                            <span>&#129504;</span>
+                            <span class="illust-label">Fine-Tune Your Own LLM</span>
+                        </div>
+                        <div class="blog-card-body">
+                            <div class="blog-card-meta">
+                                <span class="blog-category cat-ai">AI / ML</span>
+                                <span class="blog-date">Feb 11, 2026</span>
+                                <span class="blog-read-time">
+                                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    10 min read
+                                </span>
+                            </div>
+                            <div class="blog-card-title">How to Train an Open-Source LLM with Your Own Dataset — A
+                                High-Level Guide</div>
+                            <div class="blog-card-excerpt">
+                                New to AI development and unsure where to start? This step-by-step guide walks you
+                                through
+                                preparing a custom dataset, fine-tuning Llama 3.2 on Hugging Face, and using the trained
+                                model in your own codebase.
+                            </div>
+                            <button class="blog-read-more" onclick="toggleArticle(this)">
+                                <span class="read-label">Read Article</span>
+                                <span class="collapse-label">Collapse Article</span>
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3">
+                                    </path>
+                                </svg>
+                            </button>
+
+                            <!-- Full Article Content -->
+                            <div class="blog-full-content">
+                                <div class="blog-article-body">
+
+                                    <h3>Introduction</h3>
+                                    <p>Are you new to AI development? Struggling with where to start? Or do you want to
+                                        train a model on your own dataset and actually use it? In this post, I'll give
+                                        you
+                                        a high-level overview so you can get started right away.</p>
+                                    <p>Here's our goal: we want to build a question-answering system. Note — this is
+                                        <strong>not</strong> RAG (Retrieval-Augmented Generation). Instead, we will
+                                        fine-tune an open-source model on our own dataset, host it on a server, and
+                                        access it from anywhere using credentials. Keep in mind that this is a
+                                        high-level
+                                        overview; I can't explain every detail in a single post, but I'm confident
+                                        you'll
+                                        walk away with a clear understanding of how to train and use a model.
+                                    </p>
+
+                                    <h3>Step 1 — Prepare Your Dataset</h3>
+                                    <p>First, start with a PDF file. Extract all the text from the PDF and split it into
+                                        chunks of roughly 1,000 words each — so every 1,000 words becomes one chunk.</p>
+                                    <p>Next, use any LLM (such as GPT or Gemini): send each chunk to the model and ask
+                                        it to generate five possible questions based on that chunk. Now you have your
+                                        questions from the LLM, and you have the chunk data as the corresponding
+                                        answers.</p>
+                                    <p>Create a dataset in <strong>JSONL (JSON Lines)</strong> format. Here's an example
+                                        of what the output looks like:</p>
+                                    <pre><code>{"answer":"The Amazon rainforest is the largest tropical rainforest in the world. It covers much of northwestern Brazil.","question":"Which country contains most of the Amazon rainforest?"}
+{"answer":"The Amazon rainforest is the largest tropical rainforest in the world. It covers much of northwestern Brazil.","question":"What type of forest is the Amazon rainforest?"}</code></pre>
+
+                                    <h3>Step 2 — Fine-Tune the Model on Hugging Face</h3>
+                                    <p>Now it's time to fine-tune an open-source model. Follow these steps:</p>
+                                    <ol>
+                                        <li>Go to <strong>HuggingFace.co</strong>.</li>
+                                        <li>Search for <strong>"Llama 3.2 3B Instruct"</strong> and open the model page.
+                                        </li>
+                                        <li>Log in (or sign up), then click <strong>Request Access</strong>.</li>
+                                        <li>Wait approximately 10 minutes for Meta's approval.</li>
+                                    </ol>
+
+                                    <p>After approval, start fine-tuning via <strong>AutoTrain</strong>:</p>
+                                    <ol>
+                                        <li>On the model page (top right), click <strong>Train → AutoTrain</strong>.
+                                        </li>
+                                        <li>Click <strong>Create New Project</strong>.</li>
+                                    </ol>
+
+                                    <p><strong>Configure the AutoTrain Space:</strong></p>
+                                    <ul>
+                                        <li><strong>Space Name:</strong> e.g., <code>test-model-llama-3.2</code></li>
+                                        <li><strong>Description:</strong> e.g., <code>Testing Llama 3.2</code>
+                                        </li>
+                                        <li><strong>Space SDK:</strong> Docker</li>
+                                        <li><strong>Docker Template:</strong> AutoTrain (leave as default)</li>
+                                    </ul>
+
+                                    <p><strong>Select Hardware</strong> (this is important):</p>
+                                    <ul>
+                                        <li>Choose <strong>NVIDIA A10G Small</strong> (~$1/hour). Llama 3B needs several
+                                            GB of RAM, and this GPU works reliably.</li>
+                                    </ul>
+
+                                    <p><strong>Set Important Parameters:</strong></p>
+                                    <ul>
+                                        <li><strong>Pause on failure →</strong> Set to <code>0</code> (this enables
+                                            detailed error logs).</li>
+                                        <li><strong>Visibility →</strong> Private</li>
+                                        <li><strong>License →</strong> Leave empty</li>
+                                    </ul>
+                                    <p>Then click <strong>Create Space</strong>. Hugging Face will spin up the Docker
+                                        container and prepare the training environment.</p>
+
+                                    <p><strong>Configure Training Inside AutoTrain:</strong></p>
+                                    <ol>
+                                        <li>Set the <strong>Project Name</strong> (e.g., <code>test-llama</code>).
+                                        </li>
+                                        <li>Select the <strong>Base Model:</strong> Llama 3.2 3B Instruct.</li>
+                                        <li><strong>Upload your training file</strong> — it must be a
+                                            <code>.jsonl</code> file
+                                            (the dataset you prepared earlier).
+                                        </li>
+                                        <li>Set <strong>Number of Epochs</strong> to <code>1</code>.</li>
+                                        <li>Leave all other hyperparameters (learning rate, batch size, optimizer,
+                                            scheduler)
+                                            as default — <strong>do not change them</strong>.</li>
+                                    </ol>
+
+                                    <p>Click <strong>Start Training</strong>. Once training completes, the fine-tuned
+                                        model
+                                        will appear under your Hugging Face profile as a new model.</p>
+
+                                    <h3>Step 3 — Use Your Model in Code</h3>
+                                    <p>Now you can load and use your fine-tuned model directly in Python:</p>
+                                    <pre><code>from huggingface_hub import login
+
+login(token="YOUR_HF_TOKEN")
+
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+model_path = "YOUR_MODEL_NAME"
+
+tokenizer = AutoTokenizer.from_pretrained(model_path)
+
+model = AutoModelForCausalLM.from_pretrained(
+    model_path,
+    device_map="auto",
+    torch_dtype="auto"
+).eval()
+
+messages = [
+    {"role": "user", "content": "Which country contains most of the Amazon rainforest?"}
+]
+
+input_ids = tokenizer.apply_chat_template(
+    conversation=messages,
+    tokenize=True,
+    add_generation_prompt=True,
+    return_tensors="pt"
+)
+
+output_ids = model.generate(
+    input_ids.to("cuda"),
+    max_new_tokens=500
+)
+
+response = tokenizer.decode(
+    output_ids[0][input_ids.shape[1]:],
+    skip_special_tokens=True
+)
+
+print(response)</code></pre>
+
+                                    <h3>Final Thoughts</h3>
+                                    <p>Your model will now answer questions based on your training data. You might face
+                                        a
+                                        few difficulties along the way, but trust me — if you use any AI assistant
+                                        (Gemini, ChatGPT, etc.), it will help you resolve errors and clear up any
+                                        confusion. Happy coding! 🚀</p>
+
+                                    <div class="article-tags">
+                                        <span class="article-tag">#Fine-Tuning</span>
+                                        <span class="article-tag">#LLM</span>
+                                        <span class="article-tag">#Hugging Face</span>
+                                        <span class="article-tag">#Llama</span>
+                                        <span class="article-tag">#AutoTrain</span>
+                                        <span class="article-tag">#AI for Beginners</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- End Blog Grid -->
+
+            </div>
+        </main>
+
+    </div>
+
+    <script>
+        function toggleArticle(btn) {
+            const card = btn.closest('.blog-card');
+            const isExpanded = card.classList.toggle('expanded');
+
+            if (isExpanded) {
+                // Scroll the card into view smoothly
+                setTimeout(() => {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
+    </script>
+
+</body>
+
+</html>
