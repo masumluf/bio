@@ -84,7 +84,52 @@
         .nav-content {
             display: flex;
             align-items: center;
-            gap: 20px;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            max-width: 920px;
+            min-width: 0;
+        }
+
+        .nav-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 40px;
+            padding: 0 16px;
+            border-radius: 14px;
+            border: 1px solid rgba(148, 163, 184, 0.16);
+            background: rgba(31, 41, 55, 0.56);
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 13px;
+            letter-spacing: 0.01em;
+            white-space: nowrap;
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+            transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+        }
+
+        .nav-link:hover {
+            color: var(--text-main);
+            border-color: rgba(148, 163, 184, 0.28);
+            background: rgba(31, 41, 55, 0.92);
+            transform: translateY(-1px);
+        }
+
+        .nav-link:focus-visible {
+            outline: 2px solid rgba(96, 165, 250, 0.8);
+            outline-offset: 2px;
+        }
+
+        .nav-link.current-page {
+            color: var(--text-main);
+            border-color: rgba(96, 165, 250, 0.34);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.22), rgba(168, 85, 247, 0.16));
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+        }
+
+        .nav-label-short {
+            display: none;
         }
 
         .nav-content .separator {
@@ -346,6 +391,40 @@
 
         /* Responsive */
         @media (max-width: 900px) {
+            .top-nav {
+                justify-content: flex-start;
+                padding: 0 12px;
+            }
+
+            .nav-content {
+                justify-content: flex-start;
+                gap: 8px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .nav-content::-webkit-scrollbar {
+                display: none;
+            }
+
+            .nav-link {
+                min-height: 36px;
+                padding: 0 14px;
+                border-radius: 12px;
+                font-size: 12px;
+                flex: 0 0 auto;
+            }
+
+            .nav-label-full {
+                display: none;
+            }
+
+            .nav-label-short {
+                display: inline;
+            }
+
             .main-layout {
                 grid-template-columns: 1fr;
             }
@@ -382,22 +461,23 @@
 <body>
 
     <!-- Top Navigation -->
-    <nav class="top-nav">
+    <nav class="top-nav" aria-label="Primary">
         <div class="nav-content">
-            <div style="display:flex; align-items:center;">
-                <a href="index.html" style="font-weight:600; color:var(--text-main);">Home</a>
-            </div>
-            <div class="separator"></div>
-            <a href="projects.html" class="btn-cta btn-green">
-                <span></span>My Recent Projects
+            <a href="index.html" class="nav-link current-page" aria-current="page">
+                <span class="nav-label-full">Home</span>
+                <span class="nav-label-short">Home</span>
             </a>
-            <div class="separator"></div>
-            <a href="hire-me.html" class="btn-cta">
-                <span>🚀</span> Why Hire Me?
+            <a href="projects.html" class="nav-link">
+                <span class="nav-label-full">Recent Projects</span>
+                <span class="nav-label-short">Projects</span>
             </a>
-            <div class="separator"></div>
-            <a href="blog.html" class="btn-cta" style="background-color: #3b82f6;">
-                <span>✍️</span> Blog
+            <a href="hire-me.html" class="nav-link">
+                <span class="nav-label-full">Why Hire Me</span>
+                <span class="nav-label-short">Hire Me</span>
+            </a>
+            <a href="blog.html" class="nav-link">
+                <span class="nav-label-full">Blog</span>
+                <span class="nav-label-short">Blog</span>
             </a>
         </div>
     </nav>
@@ -653,6 +733,20 @@
                         <span class="company-name">Field Nation</span>
                         <div class="job-desc">
                             <ul>
+                                <li>Hybrid Data Ingestion & Orchestration: Engineered a high-scale data ingestion layer using AWS
+DMS, Fivetran, and Aurora Zero-ETL orchestrated via Cron-based workflows to consolidate data
+from fragmented databases into a unified AWS Redshift Serverless warehouse.</li>
+                                <li>Data-Centric AI Support: Curated and refined high-quality training datasets from across all internal databases to train and fine-tune proprietary AI models, directly improving model
+intelligence and predictive accuracy for the platform.</li>
+                                <li>Unified Source Modelling: Designed and maintained 60+ dbt models that transform raw
+multi-source data into governed analytics-ready marts, enabling both business reporting and
+feature engineering for ML workflows.</li>
+                                <li>Infrastructure as Code (IaC) & MLOps: Containerised the data platform using Docker and Helm,
+deploying to Kubernetes with GitHub Actions CI/CD to ensure consistent environments for both
+data transformation and model training pipelines.</li>
+                                <li>Advanced Data Governance: Developed custom Jinja macros and integrated Elementary Data for
+automated anomaly detection, ensuring that the data feeding into AI models meets strict quality
+and freshness standards.</li>
                                 <li>Contributed to Field Nation Core PHP framework Mobile Apps.</li>
                                 <li>Maintaining code related to existing bugs and platform stability.</li>
                                 <li>Reduced Datadog monitoring costs by 30% by migrating from log-based ingestion to
