@@ -417,7 +417,7 @@
         }
 
         .blog-card.expanded .blog-full-content {
-            max-height: 5000px;
+            max-height: 12000px;
             opacity: 1;
         }
 
@@ -483,6 +483,10 @@
             margin: 0 0 16px 0;
         }
 
+        .blog-article-body strong {
+            color: var(--text-main);
+        }
+
         .blog-article-body ul,
         .blog-article-body ol {
             font-size: 14px;
@@ -520,6 +524,7 @@
             color: #e6edf3;
             font-size: 13px;
             line-height: 1.6;
+            tab-size: 2;
         }
 
         .blog-article-body blockquote {
@@ -590,6 +595,133 @@
             color: var(--text-dim);
             letter-spacing: 1px;
             text-transform: uppercase;
+        }
+
+        .emoji-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 1.2em;
+            line-height: 1;
+            vertical-align: middle;
+            font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji", sans-serif;
+        }
+
+        .blog-illustration .emoji-icon {
+            font-size: 42px;
+        }
+
+        .blog-article-body h3 .emoji-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin: 0 0 20px 0;
+        }
+
+        .metric-card {
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            background: rgba(59, 130, 246, 0.08);
+        }
+
+        .metric-card.warning {
+            background: rgba(245, 158, 11, 0.08);
+            border-color: rgba(245, 158, 11, 0.18);
+        }
+
+        .metric-card.success {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: rgba(16, 185, 129, 0.18);
+        }
+
+        .metric-card.neutral {
+            background: rgba(99, 102, 241, 0.08);
+            border-color: rgba(99, 102, 241, 0.18);
+        }
+
+        .metric-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            margin-bottom: 8px;
+        }
+
+        .metric-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 4px;
+        }
+
+        .metric-detail {
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .code-compare {
+            display: grid;
+            gap: 16px;
+            margin: 0 0 20px 0;
+        }
+
+        .code-panel {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            background: #0f1723;
+        }
+
+        .code-panel.before {
+            border-color: rgba(245, 158, 11, 0.18);
+        }
+
+        .code-panel.after {
+            border-color: rgba(16, 185, 129, 0.18);
+        }
+
+        .code-panel-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .code-panel.before .code-panel-title {
+            color: #fbbf24;
+            background: rgba(245, 158, 11, 0.08);
+        }
+
+        .code-panel.after .code-panel-title {
+            color: #34d399;
+            background: rgba(16, 185, 129, 0.08);
+        }
+
+        .code-panel-summary {
+            padding: 12px 16px 0 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .code-panel pre {
+            margin: 0;
+            border: none;
+            border-radius: 0;
+            background: transparent;
         }
 
         /* Gradient Backgrounds for illustrations */
@@ -822,11 +954,11 @@
             </a>
             <div class="separator"></div>
             <a href="hire-me.html" class="btn-cta">
-                <span>🚀</span> Why Hire Me?
+                <span class="emoji-icon" aria-hidden="true">&#128640;</span> Why Hire Me?
             </a>
             <div class="separator"></div>
             <a href="blog.html" class="btn-cta btn-blue">
-                <span>✍️</span> Blog
+                <span class="emoji-icon" aria-hidden="true">&#9997;&#65039;</span> Blog
             </a>
         </div>
     </nav>
@@ -900,7 +1032,7 @@
 
                 <!-- Blog Hero -->
                 <div class="blog-hero">
-                    <h2>Blog & Insights</h2>
+                    <h2>Blog &amp; Insights</h2>
                     <p>Sharing my experiences building scalable systems, working with AI, and lessons learned from
                         real-world engineering challenges.</p>
                 </div>
@@ -908,10 +1040,270 @@
                 <!-- Blog Grid -->
                 <div class="blog-grid">
 
+                    <!-- Firebase Hosting Caching Post -->
+                    <div class="blog-card featured" id="post-firebase-cache">
+                        <div class="blog-illustration grad-blue">
+                            <span class="emoji-icon" aria-hidden="true">&#128640;</span>
+                            <span class="illust-label">Firebase Hosting Caching</span>
+                        </div>
+                        <div class="blog-card-body">
+                            <div class="blog-card-meta">
+                                <span class="blog-category cat-cloud">Cloud / Web</span>
+                                <span class="blog-date">Mar 29, 2026</span>
+                                <span class="blog-read-time">
+                                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2"
+                                        viewBox="0 0 24 24">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <polyline points="12 6 12 12 16 14"></polyline>
+                                    </svg>
+                                    3 min read
+                                </span>
+                            </div>
+                            <div class="blog-card-title">Cutting Firebase Hosting Costs by ~90% with a Tiny Config
+                                Change</div>
+                            <div class="blog-card-excerpt">
+                                A small <code>firebase.json</code> tweak can slash bandwidth usage while still serving
+                                fresh deployments correctly. No infra changes. No refactor. Just smarter caching.
+                            </div>
+                            <button class="blog-read-more" onclick="toggleArticle(this)">
+                                <span class="read-label">Read Article</span>
+                                <span class="collapse-label">Collapse Article</span>
+                                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3">
+                                    </path>
+                                </svg>
+                            </button>
+
+                            <div class="blog-full-content">
+                                <div class="blog-article-body">
+                                    <blockquote>
+                                        <p>No infra changes. No refactor. Just smarter caching.</p>
+                                    </blockquote>
+
+                                    <h3><span class="emoji-icon" aria-hidden="true">&#9888;&#65039;</span>The problem</h3>
+                                    <p>I recently revisited my Firebase Hosting setup and found that without proper
+                                        caching, the browser keeps downloading the same JavaScript, CSS, JSON, and image
+                                        files again and again. That drives up bandwidth usage, slows down repeat visits,
+                                        and burns through Firebase's free tier much faster than expected.</p>
+                                    <ul>
+                                        <li>Browsers repeatedly download the same JS, CSS, JSON, and image assets.</li>
+                                        <li>Bandwidth usage increases significantly.</li>
+                                        <li>Repeat visits become slower than they need to be.</li>
+                                        <li>Firebase's free hosting tier gets exhausted quickly.</li>
+                                    </ul>
+                                    <p>I was trying to stay inside Firebase's <strong>10 GB free tier</strong> while
+                                        handling about <strong>100k monthly users</strong>. Without caching, the math is
+                                        rough: <code>100,000 requests &times; 575 KB &asymp; 57.5 GB</code>. That is
+                                        about <strong>47 GB over the free limit</strong>.</p>
+
+                                    <h3><span class="emoji-icon" aria-hidden="true">&#9989;</span>The fix</h3>
+                                    <p>The change is simple but high impact:</p>
+                                    <ul>
+                                        <li><code>index.html</code> stays uncached with <code>Cache-Control: no-cache</code>.</li>
+                                        <li>Static assets get <code>public, max-age=31536000, immutable</code>.</li>
+                                    </ul>
+
+                                    <h3><span class="emoji-icon" aria-hidden="true">&#128260;</span>What happens with this setup?</h3>
+                                    <ul>
+                                        <li>The browser always checks <code>index.html</code>, which is a tiny file.</li>
+                                        <li>Static assets are cached aggressively.</li>
+                                        <li>Repeat visits reuse cached files instead of re-downloading them.</li>
+                                        <li>New deployments still work correctly because the HTML points to the latest asset filenames.</li>
+                                    </ul>
+
+                                    <h3><span class="emoji-icon" aria-hidden="true">&#9889;</span>Real impact</h3>
+                                    <div class="metric-grid">
+                                        <div class="metric-card warning">
+                                            <div class="metric-label">Before Caching</div>
+                                            <div class="metric-value">57.5 GB</div>
+                                            <div class="metric-detail">100k requests downloading the full app bundle.</div>
+                                        </div>
+                                        <div class="metric-card success">
+                                            <div class="metric-label">After Caching</div>
+                                            <div class="metric-value">5.8 GB</div>
+                                            <div class="metric-detail">Most visits reuse cached assets instead of pulling them again.</div>
+                                        </div>
+                                        <div class="metric-card neutral">
+                                            <div class="metric-label">Estimated Reduction</div>
+                                            <div class="metric-value">~90%</div>
+                                            <div class="metric-detail">Comfortably back under Firebase's free hosting tier.</div>
+                                        </div>
+                                    </div>
+                                    <p>With proper caching in place, repeat visitors download <strong>0 KB</strong>,
+                                        returning visitors usually pay only the cost of a tiny HTML check, and only new
+                                        visitors pull the full app. That drops total bandwidth from about
+                                        <strong>57.5 GB</strong> to roughly <strong>5.8 GB</strong>.</p>
+
+                                    <h3><span class="emoji-icon" aria-hidden="true">&#129504;</span>Why this works</h3>
+                                    <p>Modern build tools like React and Vite generate hashed asset filenames such as
+                                        <code>main.a1b2c3.js</code> and <code>main.z9y8x7.js</code>. On every deploy,
+                                        the browser fetches a fresh <code>index.html</code>, sees the new filenames, and
+                                        downloads only the new files it actually needs.</p>
+                                    <p>That means your old files can be cached for a year without becoming dangerous.
+                                        The cache is tied to the filename, not the conceptual asset. If the filename
+                                        changes, the browser automatically requests the new one.</p>
+
+                                    <h3>Configuration difference</h3>
+                                    <div class="code-compare">
+                                        <div class="code-panel before">
+                                            <div class="code-panel-title">
+                                                <span class="emoji-icon" aria-hidden="true">&#128683;</span>
+                                                Before caching headers
+                                            </div>
+                                            <div class="code-panel-summary">No explicit cache policy for the HTML shell
+                                                or static assets, so the browser keeps paying the full bandwidth cost.
+                                            </div>
+                                            <pre><code class="language-json">{
+  "hosting": [
+    {
+      "target": "staging",
+      "public": "public",
+      "ignore": [
+        "index.html",
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "service_id",
+            "region": "US-EAST1"
+          }
+        }
+      ]
+    },
+    {
+      "target": "prod",
+      "public": "public",
+      "ignore": [
+        "index.html",
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "run": {
+            "serviceId": "service_id",
+            "region": "US-EAST1"
+          }
+        }
+      ]
+    }
+  ]
+}</code></pre>
+                                        </div>
+
+                                        <div class="code-panel after">
+                                            <div class="code-panel-title">
+                                                <span class="emoji-icon" aria-hidden="true">&#9989;</span>
+                                                After adding cache headers
+                                            </div>
+                                            <div class="code-panel-summary">Keep <code>index.html</code> fresh, cache
+                                                immutable assets hard, and let hashed filenames handle safe updates.</div>
+                                            <pre><code class="language-json">{
+  "hosting": [
+    {
+      "target": "staging",
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "headers": [
+        {
+          "source": "index.html",
+          "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        },
+        {
+          "source": "static/**",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        },
+        {
+          "source": "**/*.@(js|css|json|webp|png|jpg|svg)",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        }
+      ]
+    },
+    {
+      "target": "prod",
+      "public": "build",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "headers": [
+        {
+          "source": "index.html",
+          "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
+        },
+        {
+          "source": "static/**",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        },
+        {
+          "source": "**/*.@(js|css|json|webp|png|jpg|svg)",
+          "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+        }
+      ]
+    }
+  ]
+}</code></pre>
+                                        </div>
+                                    </div>
+
+                                    <h3><span class="emoji-icon" aria-hidden="true">&#128274;</span>Why a one-year cache is safe</h3>
+                                    <p>The browser may cache <code>main.a1b2c3.js</code> for a year, but when a new
+                                        deploy ships and <code>index.html</code> points to
+                                        <code>main.z9y8x7.js</code>, the browser requests the new file automatically.
+                                        No stale code. No broken updates.</p>
+
+                                    <h3><span class="emoji-icon" aria-hidden="true">&#9881;&#65039;</span>Bonus: atomic deploys</h3>
+                                    <p>Firebase Hosting uses atomic deploys, so the new <code>index.html</code> and the
+                                        new asset files go live together. That avoids broken references between the HTML
+                                        shell and the built assets.</p>
+
+                                    <h3><span class="emoji-icon" aria-hidden="true">&#128161;</span>Key takeaway</h3>
+                                    <p>Caching is not just a performance optimization. It directly affects
+                                        <strong>cost</strong>, <strong>speed</strong>, and <strong>deployment
+                                            safety</strong>. A few lines in <code>firebase.json</code> can save real
+                                        money and improve UX at scale. If you are using Firebase Hosting without proper
+                                        caching, you are probably overpaying.</p>
+
+                                    <div class="article-tags">
+                                        <span class="article-tag">#Firebase</span>
+                                        <span class="article-tag">#Hosting</span>
+                                        <span class="article-tag">#Caching</span>
+                                        <span class="article-tag">#Performance</span>
+                                        <span class="article-tag">#CostOptimization</span>
+                                        <span class="article-tag">#FrontendInfra</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Featured Post -->
                     <div class="blog-card featured" id="post-finetune-llm">
                         <div class="blog-illustration grad-purple">
-                            <span>&#129504;</span>
+                            <span class="emoji-icon" aria-hidden="true">&#129504;</span>
                             <span class="illust-label">Fine-Tune Your Own LLM</span>
                         </div>
                         <div class="blog-card-body">
@@ -1082,7 +1474,7 @@ print(response)</code></pre>
                                         a
                                         few difficulties along the way, but trust me — if you use any AI assistant
                                         (Gemini, ChatGPT, etc.), it will help you resolve errors and clear up any
-                                        confusion. Happy coding! 🚀</p>
+                                        confusion. Happy coding! <span class="emoji-icon" aria-hidden="true">&#128640;</span></p>
 
                                     <div class="article-tags">
                                         <span class="article-tag">#Fine-Tuning</span>
